@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"crossorigin="anonymous">	
+<link rel="stylesheet" href="new.css">
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<section>
+<div class="con">
+<header class="head-form">
+<h2 style="background-color:#D63BFE;">Number Guessing Game</h2>
+<p>Try and guess a random number between 1 and 100</p>
+<p>You have 10 attempts to guess the right number</p>
+<h1 style="background-color:#F6386D; color:white;">Guess a number</h1>
+</header>
+<div class="field-set">
+<input class="form-input" id="usernumber" type="text">
+<br>
+<button onclick="validate()" id="guesssubmit">SUBMIT GUESS</button><br><br><br><br><br>
+<p style="text-align:center" id="data1"></p>
+<p style="text-align:center" id="data2"></p>
+<h1 style="text-align:center; background-color:#D63BFE;" id="data3"></h1>
+</div>
+</div>
+</section>
+
+
+<script type="text/javascript">
+var text1 = document.getElementById("data1");
+var text2 = document.getElementById("data2");
+var text3 = document.getElementById("data3");
+var secretkey=29;
+var noofguesses=10;
+var temp=noofguesses;
+var guessednos=[];
+function validate(){ 
+    var number = document.getElementById("usernumber").value;
+    if(number<1||number>100){
+       alert("Please enter a number between 1 and 100.");
+    }
+    else{
+       guessednos.push(number);
+       noofguesses=noofguesses-1;
+       if(number==secretkey){
+    	  text1.textContent="The actual guessing number was: "+secretkey;
+    	  text2.textContent="You guessed the number in "+(temp-noofguesses)+" guesses";
+    	  text3.textContent="YOU WON THE GAME!";
+          document.getElementById("guesssubmit").disabled=true;
+     }
+     else if(number<secretkey){
+    	 text3.textContent = "Too low! Try again!";
+          if(noofguesses==0){
+        	text2.textContent="Guesses Remaining: 0";
+        	text3.textContent="YOU LOST THE GAME!";
+            document.getElementById("guesssubmit").disabled=true;
+      }
+      else{
+    	  text1.textContent="Previous Guesses is: "+guessednos;
+    	  text2.textContent="Guesses Remaining: "+noofguesses;
+        }
+      }
+      else if(number>secretkey){
+           text3.textContent = "Too high! Try again!";
+           if(noofguesses==0){
+        	  text2.textContent="Guesses Remaining: 0";
+        	  text3.textContent="YOU LOST THE GAME!";
+              document.getElementById("guesssubmit").disabled = true;
+           }
+           else{
+        	  text1.textContent="Previous Guesses is: "+guessednos;
+        	  text2.textContent="Guesses Remaining: "+noofguesses;
+           }
+       }
+    }
+}
+       </script>
+   </body>
+</html>
